@@ -92,9 +92,11 @@ func getMetadata(obj map[string]interface{}) map[string]interface{} {
 
 func toRole(rawRole map[string]interface{}) Role {
 	rules := []Rule{}
-	rawRules := rawRole["rules"].([]interface{})
-	for _, r := range rawRules {
-		rules = append(rules, toRule(r))
+	if (rawRole["rules"] != nil) {
+		rawRules := rawRole["rules"].([]interface{})
+		for _, r := range rawRules {
+			rules = append(rules, toRule(r))
+		}
 	}
 
 	return Role{
